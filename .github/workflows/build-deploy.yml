@@ -1,0 +1,40 @@
+name: Build and deploy docker iamge to ECR
+
+run-name : Build and deploy docker iamge to ECR | $ {{ github_ref.name }}
+
+on:
+  push:
+    branhces: 
+    - main
+
+permission:
+  id-token: write
+  contents: read
+
+jobs:
+  ecr-push:
+  - name: building and pushing image to ECR
+    runs-on: ubuntu-latest
+
+  steps:
+    - name: chekout repository
+      uses: actions/checkout@v4 
+    
+    - name: configure OIDC connect between AWS and github
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+        aws-region: $ {{ vars.AWS_REGION }}
+
+    - name: Login to ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build and Push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:latest
+            ${{ steps.login-ecr.outputs.registry }}/${{ vars.ECR_REPOSITORY }}:${{ github.sha }}
