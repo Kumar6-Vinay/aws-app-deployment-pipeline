@@ -7,7 +7,7 @@ on:
     branhces: 
     - main
 
-permission:
+permissions:
   id-token: write
   contents: read
 
