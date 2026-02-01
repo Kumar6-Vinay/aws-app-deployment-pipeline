@@ -1,6 +1,6 @@
 name: Build and deploy docker iamge to ECR
 
-run-name : Build and deploy docker iamge to ECR | $ {{ github_ref.name }}
+run-name : Build and deploy docker iamge to ECR | ${{ github_ref.name }}
 
 on:
   push:
@@ -13,8 +13,8 @@ permissions:
 
 jobs:
   ecr-push:
-  name: building and pushing image to ECR
-  runs-on: ubuntu-latest
+    name: building and pushing image to ECR
+    runs-on: ubuntu-latest
 
   steps:
     - name: chekout repository
