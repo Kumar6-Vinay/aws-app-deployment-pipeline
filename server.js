@@ -24,7 +24,7 @@ app.get('/health', (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.status(200).send('DoorFeed take-home app is running.');
+  res.status(200).send('DoorFeed-v2 take-home app is running.');
 });
 
 // Start server
