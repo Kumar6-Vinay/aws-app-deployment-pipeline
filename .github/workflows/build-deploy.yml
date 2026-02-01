@@ -1,6 +1,6 @@
 name: Build and deploy docker iamge to ECR
 
-run-name : Build and deploy docker iamge to ECR | ${{ github_ref.name }}
+run-name : Build and deploy docker iamge to ECR | ${{ github.ref_name }}
 
 on:
   push:
