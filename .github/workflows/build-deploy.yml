@@ -13,8 +13,8 @@ permissions:
 
 jobs:
   ecr-push:
-  - name: building and pushing image to ECR
-    runs-on: ubuntu-latest
+  name: building and pushing image to ECR
+  runs-on: ubuntu-latest
 
   steps:
     - name: chekout repository
